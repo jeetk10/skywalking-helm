@@ -69,4 +69,4 @@ release: release-src package
 
 publish: package
 	aws ecr get-login-password --region us-east-2 | helm registry login --username AWS --password-stdin 975049953268.dkr.ecr.us-east-2.amazonaws.com
-	helm push ${CHART_NAME}-${VERSION}.tgz oci://975049953268.dkr.ecr.us-east-2.amazonaws.com --debug
+	helm push ${CHART_NAME}-${VERSION}.tgz oci://975049953268.dkr.ecr.us-east-2.amazonaws.com
