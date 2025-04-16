@@ -64,5 +64,9 @@ release: release-src package
 	gpg --batch --yes --armor --detach-sig $(CHART_NAME)-$(VERSION).tgz
 	shasum -a 512 $(CHART_NAME)-$(VERSION).tgz > $(CHART_NAME)-$(VERSION).tgz.sha512
 
+# publish: package
+# 	helm push ${CHART_NAME}-${VERSION}.tgz oci://registry-1.docker.io/apache
+
 publish: package
-	helm push ${CHART_NAME}-${VERSION}.tgz oci://registry-1.docker.io/apache
+	aws ecr get-login-password --region us-east-2 | helm registry login --username AWS --password-stdin 975049953268.dkr.ecr.us-east-2.amazonaws.com
+	helm push ${CHART_NAME}-${VERSION}.tgz oci://975049953268.dkr.ecr.us-east-2.amazonaws.com --debug
