@@ -140,7 +140,7 @@ spec:
           value: "{{ .Values.oap.ports.zipkinquery }}"
 {{- end }}
         - name: JAVA_OPTS
-          value: "-Dmode=no-init {{ .Values.oap.javaOpts }}"
+          value: "-Dmode=init {{ .Values.oap.javaOpts }}"
         - name: SW_CLUSTER
           value: kubernetes
         - name: SW_CLUSTER_K8S_NAMESPACE
